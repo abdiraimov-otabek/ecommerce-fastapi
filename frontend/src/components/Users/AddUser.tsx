@@ -40,7 +40,7 @@ const AddUser = () => {
     criteriaMode: "all",
     defaultValues: {
       email: "",
-      name: "",
+      full_name: "",
     },
   });
 
@@ -87,13 +87,13 @@ const AddUser = () => {
             <VStack gap={4}>
               <Field
                 required
-                invalid={!!errors.name}
-                errorText={errors.name?.message}
-                label="Name"
+                invalid={!!errors.full_name}
+                errorText={errors.full_name?.message}
+                label="full_name"
               >
                 <Input
-                  {...register("name", {
-                    required: "Name is required.",
+                  {...register("full_name", {
+                    required: "Full name is required.",
                   })}
                   placeholder="Name"
                   type="text"
