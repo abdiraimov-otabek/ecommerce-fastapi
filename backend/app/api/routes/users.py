@@ -15,14 +15,13 @@ from app.core.security import get_password_hash, verify_password
 from app.models import (
     Item,
     Message,
-    UpdatePassword,
     User,
     UserCreate,
     UserPublic,
-    UserRegister,
     UsersPublic,
-    UserUpdate,
     UserUpdateMe,
+    UpdatePassword,
+    UserRegister,
 )
 from app.utils import generate_new_account_email, send_email
 
@@ -182,7 +181,7 @@ def update_user(
     *,
     session: SessionDep,
     user_id: uuid.UUID,
-    user_in: UserUpdate,
+    user_in: UserUpdateMe,
 ) -> Any:
     """
     Update a user.
