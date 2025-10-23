@@ -17,7 +17,9 @@ import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
 import { Route as LayoutUsersRouteImport } from './routes/_layout/users'
 import { Route as LayoutSettingsRouteImport } from './routes/_layout/settings'
+import { Route as LayoutProductsRouteImport } from './routes/_layout/products'
 import { Route as LayoutItemsRouteImport } from './routes/_layout/items'
+import { Route as LayoutCategoriesRouteImport } from './routes/_layout/categories'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
@@ -58,9 +60,19 @@ const LayoutSettingsRoute = LayoutSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutProductsRoute = LayoutProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const LayoutItemsRoute = LayoutItemsRouteImport.update({
   id: '/items',
   path: '/items',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutCategoriesRoute = LayoutCategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -69,7 +81,9 @@ export interface FileRoutesByFullPath {
   '/recover-password': typeof RecoverPasswordRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
+  '/categories': typeof LayoutCategoriesRoute
   '/items': typeof LayoutItemsRoute
+  '/products': typeof LayoutProductsRoute
   '/settings': typeof LayoutSettingsRoute
   '/users': typeof LayoutUsersRoute
   '/': typeof LayoutIndexRoute
@@ -79,7 +93,9 @@ export interface FileRoutesByTo {
   '/recover-password': typeof RecoverPasswordRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
+  '/categories': typeof LayoutCategoriesRoute
   '/items': typeof LayoutItemsRoute
+  '/products': typeof LayoutProductsRoute
   '/settings': typeof LayoutSettingsRoute
   '/users': typeof LayoutUsersRoute
   '/': typeof LayoutIndexRoute
@@ -91,7 +107,9 @@ export interface FileRoutesById {
   '/recover-password': typeof RecoverPasswordRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
+  '/_layout/categories': typeof LayoutCategoriesRoute
   '/_layout/items': typeof LayoutItemsRoute
+  '/_layout/products': typeof LayoutProductsRoute
   '/_layout/settings': typeof LayoutSettingsRoute
   '/_layout/users': typeof LayoutUsersRoute
   '/_layout/': typeof LayoutIndexRoute
@@ -103,7 +121,9 @@ export interface FileRouteTypes {
     | '/recover-password'
     | '/reset-password'
     | '/signup'
+    | '/categories'
     | '/items'
+    | '/products'
     | '/settings'
     | '/users'
     | '/'
@@ -113,7 +133,9 @@ export interface FileRouteTypes {
     | '/recover-password'
     | '/reset-password'
     | '/signup'
+    | '/categories'
     | '/items'
+    | '/products'
     | '/settings'
     | '/users'
     | '/'
@@ -124,7 +146,9 @@ export interface FileRouteTypes {
     | '/recover-password'
     | '/reset-password'
     | '/signup'
+    | '/_layout/categories'
     | '/_layout/items'
+    | '/_layout/products'
     | '/_layout/settings'
     | '/_layout/users'
     | '/_layout/'
@@ -196,6 +220,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutSettingsRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/products': {
+      id: '/_layout/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof LayoutProductsRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/items': {
       id: '/_layout/items'
       path: '/items'
@@ -203,18 +234,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutItemsRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/categories': {
+      id: '/_layout/categories'
+      path: '/categories'
+      fullPath: '/categories'
+      preLoaderRoute: typeof LayoutCategoriesRouteImport
+      parentRoute: typeof LayoutRoute
+    }
   }
 }
 
 interface LayoutRouteChildren {
+  LayoutCategoriesRoute: typeof LayoutCategoriesRoute
   LayoutItemsRoute: typeof LayoutItemsRoute
+  LayoutProductsRoute: typeof LayoutProductsRoute
   LayoutSettingsRoute: typeof LayoutSettingsRoute
   LayoutUsersRoute: typeof LayoutUsersRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutCategoriesRoute: LayoutCategoriesRoute,
   LayoutItemsRoute: LayoutItemsRoute,
+  LayoutProductsRoute: LayoutProductsRoute,
   LayoutSettingsRoute: LayoutSettingsRoute,
   LayoutUsersRoute: LayoutUsersRoute,
   LayoutIndexRoute: LayoutIndexRoute,

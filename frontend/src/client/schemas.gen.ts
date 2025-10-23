@@ -55,6 +55,110 @@ export const Body_login_login_access_tokenSchema = {
     title: 'Body_login-login_access_token'
 } as const;
 
+export const CategoriesPublicSchema = {
+    properties: {
+        data: {
+            items: {
+                '$ref': '#/components/schemas/CategoryPublic'
+            },
+            type: 'array',
+            title: 'Data'
+        },
+        count: {
+            type: 'integer',
+            title: 'Count'
+        }
+    },
+    type: 'object',
+    required: ['data', 'count'],
+    title: 'CategoriesPublic'
+} as const;
+
+export const CategoryCreateSchema = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        parent_id: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'uuid'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Parent Id',
+            description: 'ID родительской категории (если это подкатегория)'
+        }
+    },
+    type: 'object',
+    required: ['name'],
+    title: 'CategoryCreate'
+} as const;
+
+export const CategoryPublicSchema = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        parent_id: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'uuid'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Parent Id',
+            description: 'ID родительской категории (если это подкатегория)'
+        },
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        }
+    },
+    type: 'object',
+    required: ['name', 'id'],
+    title: 'CategoryPublic'
+} as const;
+
+export const CategoryUpdateSchema = {
+    properties: {
+        name: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name'
+        },
+        parent_id: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'uuid'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Parent Id'
+        }
+    },
+    type: 'object',
+    title: 'CategoryUpdate'
+} as const;
+
 export const HTTPValidationErrorSchema = {
     properties: {
         detail: {
@@ -237,6 +341,266 @@ export const PrivateUserCreateSchema = {
     title: 'PrivateUserCreate'
 } as const;
 
+export const ProductCreateSchema = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        description: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description'
+        },
+        sku: {
+            type: 'string',
+            title: 'Sku'
+        },
+        price: {
+            anyOf: [
+                {
+                    type: 'number'
+                },
+                {
+                    type: 'string',
+                    pattern: '^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$'
+                }
+            ],
+            title: 'Price'
+        },
+        quantity: {
+            type: 'integer',
+            title: 'Quantity'
+        },
+        in_stock: {
+            type: 'boolean',
+            title: 'In Stock',
+            default: true
+        },
+        image_url: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Image Url'
+        },
+        is_active: {
+            type: 'boolean',
+            title: 'Is Active',
+            default: true
+        },
+        category_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Category Id'
+        }
+    },
+    type: 'object',
+    required: ['name', 'sku', 'price', 'quantity', 'category_id'],
+    title: 'ProductCreate'
+} as const;
+
+export const ProductReadSchema = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        description: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description'
+        },
+        sku: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Sku'
+        },
+        price: {
+            type: 'string',
+            pattern: '^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$',
+            title: 'Price'
+        },
+        quantity: {
+            type: 'integer',
+            title: 'Quantity'
+        },
+        in_stock: {
+            type: 'boolean',
+            title: 'In Stock',
+            default: true
+        },
+        image_url: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Image Url'
+        },
+        is_active: {
+            type: 'boolean',
+            title: 'Is Active',
+            default: true
+        },
+        category_id: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'uuid'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Category Id'
+        },
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        created_at: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Created At'
+        },
+        updated_at: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Updated At'
+        }
+    },
+    type: 'object',
+    required: ['name', 'price', 'quantity', 'id', 'created_at', 'updated_at'],
+    title: 'ProductRead'
+} as const;
+
+export const ProductUpdateSchema = {
+    properties: {
+        name: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name'
+        },
+        description: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description'
+        },
+        price: {
+            anyOf: [
+                {
+                    type: 'number'
+                },
+                {
+                    type: 'string',
+                    pattern: '^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Price'
+        },
+        quantity: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Quantity'
+        },
+        in_stock: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'In Stock'
+        },
+        image_url: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Image Url'
+        },
+        is_active: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Is Active'
+        },
+        category_id: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'uuid'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Category Id'
+        }
+    },
+    type: 'object',
+    title: 'ProductUpdate'
+} as const;
+
 export const TokenSchema = {
     properties: {
         access_token: {
@@ -389,61 +753,6 @@ export const UserRegisterSchema = {
     title: 'UserRegister'
 } as const;
 
-export const UserUpdateSchema = {
-    properties: {
-        email: {
-            anyOf: [
-                {
-                    type: 'string',
-                    maxLength: 255,
-                    format: 'email'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Email'
-        },
-        is_active: {
-            type: 'boolean',
-            title: 'Is Active',
-            default: true
-        },
-        is_superuser: {
-            type: 'boolean',
-            title: 'Is Superuser',
-            default: false
-        },
-        full_name: {
-            anyOf: [
-                {
-                    type: 'string',
-                    maxLength: 255
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Full Name'
-        },
-        password: {
-            anyOf: [
-                {
-                    type: 'string',
-                    maxLength: 40,
-                    minLength: 8
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Password'
-        }
-    },
-    type: 'object',
-    title: 'UserUpdate'
-} as const;
-
 export const UserUpdateMeSchema = {
     properties: {
         full_name: {
@@ -470,6 +779,19 @@ export const UserUpdateMeSchema = {
                 }
             ],
             title: 'Email'
+        },
+        password: {
+            anyOf: [
+                {
+                    type: 'string',
+                    maxLength: 40,
+                    minLength: 8
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Password'
         }
     },
     type: 'object',
