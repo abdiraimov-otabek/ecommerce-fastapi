@@ -4,13 +4,10 @@ import { useState } from "react";
 
 import {
   type Body_login_login_access_token as AccessToken,
-  type ApiError,
-  LoginService,
   type UserPublic,
   type UserRegister,
   UsersService,
 } from "@/client";
-import { handleError } from "@/utils";
 
 const isLoggedIn = () => {
   return localStorage.getItem("access_token") !== null;
